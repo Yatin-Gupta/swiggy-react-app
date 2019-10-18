@@ -114,3 +114,26 @@
   margin-bottom: 20px;
   border-bottom: 1px dashed #bebfc5;
 }
+
+.show-more-card {
+  height: 250px;
+  background-color: #fff;
+  border: 2px solid #e46d47;
+  color: #e46d47 !important;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.show-more-card:hover {
+  position: relative;
+  box-shadow: 0 4px 14px #d4d5d9;
+}

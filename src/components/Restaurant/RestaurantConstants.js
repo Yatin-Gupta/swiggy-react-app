@@ -54,3 +54,8 @@ export const FOOD_IMAGES = [
 ];
 
 export const RESTAURANTS_DEFAULT_LIMIT = 5;
+
+export const SHOW_MORE_ROWS = 2;
+
+// This number should be divisible by 12
+export const RESTAURANTS_PER_ROW = 3;
