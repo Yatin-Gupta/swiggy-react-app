@@ -1,0 +1,116 @@
+.category-heading {
+  font-size: 28px;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.restaurant-category {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 85px;
+  color: #535665;
+  cursor: pointer;
+  margin: 0 4%;
+  width: auto;
+}
+
+.restaurant-category:hover {
+  color: #e46d47;
+}
+
+.restaurant-category .category-avatar {
+  transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.restaurant-category:hover .category-avatar {
+  transform: scale3d(1.2, 1.2, 1);
+  box-shadow: 0 0 8px 3px #e9e9eb;
+}
+
+.restaurant-category.selected {
+  background-color: #e46d47;
+  color: #fff;
+}
+
+.restaurant-categories {
+  box-shadow: 0 2px 4px 0 rgba(48, 56, 97, 0.2);
+  height: 545px;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.restaurant-category-navtext {
+  margin-left: 7%;
+}
+
+.restaurant-category-navtext div:first-child {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.restaurant-category-navtext div:last-child {
+  opacity: 0.8;
+  font-size: 10px;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.restaurant-side-panel {
+  width: 20%;
+  position: sticky;
+}
+
+.restaurant-main-panel {
+  margin-left: 5%;
+  width: 75%;
+}
+
+.restaurant-main-panel .food-title {
+  font-size: 17px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.restaurant-main-panel .food-type {
+  color: #686b78;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.restaurant-main-panel .food-other-details {
+  display: flex;
+  align-items: center;
+  margin-top: 18px;
+  font-size: 12px;
+  justify-content: space-between;
+  color: #535665;
+}
+
+.restaurant-main-panel .restaurant-card {
+  padding: 20px;
+  border: 1px solid #fff;
+  contain: content;
+  box-shadow: none;
+}
+
+.restaurant-main-panel .restaurant-card:hover {
+  box-shadow: 0 4px 7px 0 rgba(218, 220, 230, 0.6);
+  border-color: #d3d5df;
+  cursor: pointer;
+}
+
+.restaurant-main-panel .food-other-details > .rating {
+  font-size: 15px;
+}
+
+.restaurant-main-panel .food-other-details > .rating > svg {
+  font-size: 15px;
+}
+
+.restaurant-main-panel .restaurants-list:not(:last-child) {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #bebfc5;
+}

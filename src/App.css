@@ -1,0 +1,14 @@
+body {
+  background-color: #fff !important;
+  font-family: "ProximaNova", Arial, "Helvetica Neue", sans-serif !important;
+}
+
+.link-decoration-off {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-decoration-off:hover {
+  text-decoration: none;
+  color: inherit;
+}
