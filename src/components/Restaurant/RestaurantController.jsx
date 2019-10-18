@@ -26,6 +26,7 @@ class RestaurantController extends React.Component {
     let selectedCategory = "";
     if (Array.isArray(response) && response.length > 0) {
       let index = 0;
+      let onlyOnSwiggyRestaurants = [];
       for (const item of response) {
         if (index === 0) {
           selectedCategory = item.category;
@@ -33,7 +34,19 @@ class RestaurantController extends React.Component {
         restaurantsList[item.category] = {};
         restaurantsList[item.category].restaurants = item.restaurantList;
         restaurantsList[item.category].limit = RESTAURANTS_DEFAULT_LIMIT;
+        onlyOnSwiggyRestaurants = [
+          ...onlyOnSwiggyRestaurants,
+          ...restaurantsList[item.category].restaurants.filter(
+            restaurant => restaurant.isExlusive
+          )
+        ];
         ++index;
+      }
+
+      if (onlyOnSwiggyRestaurants.length > 0) {
+        restaurantsList["only on swiggy"] = {};
+        restaurantsList["only on swiggy"].restaurants = onlyOnSwiggyRestaurants;
+        restaurantsList["only on swiggy"].limit = RESTAURANTS_DEFAULT_LIMIT;
       }
     }
     this.setState({ restaurantsList, selectedCategory });
