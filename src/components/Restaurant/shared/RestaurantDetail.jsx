@@ -1,11 +1,13 @@
 import { Card, CardContent, CardMedia } from "@material-ui/core";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import React from "react";
+import Rating from "../../shared/Rating";
+
 import { FOOD_IMAGES } from "../RestaurantConstants";
 
 function RestaurantDetail(props) {
   const currentImageIndex = parseInt(Math.random() * FOOD_IMAGES.length, 10);
   const { classes, restaurant } = props;
+  const restaurantRating = parseFloat(restaurant.ratings);
   return (
     <React.Fragment>
       <Card className="restaurant-card">
@@ -17,10 +19,21 @@ function RestaurantDetail(props) {
           <div className="food-title">{restaurant.name}</div>
           <div className="food-type">{restaurant.food_types.join(", ")}</div>
           <div className="food-other-details">
-            <div className="rating">
-              <StarBorderIcon />
-              <span> __</span>
-            </div>
+            {isNaN(restaurantRating) ? (
+              <Rating />
+            ) : restaurantRating >= 4 ? (
+              <Rating
+                color={"success"}
+                star={"full"}
+                rating={`${restaurantRating}`}
+              />
+            ) : (
+              <Rating
+                color={"warning"}
+                star={"full"}
+                rating={`${restaurantRating}`}
+              />
+            )}
             <div className="seperator">•</div>
             <div className="cooking-time">{restaurant.delivery_time}</div>
             <div className="seperator">•</div>

@@ -1,0 +1,27 @@
+.rating {
+  color: #535665;
+  height: 20px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.rating.rating-success {
+  color: #fff;
+  background-color: #48c479;
+}
+
+.rating.rating-warning {
+  color: #fff;
+  background-color: #db7c38;
+}
+
+.rating.rating-sm {
+  width: 43px;
+  padding: 0 5px;
+  font-size: 12px;
+}
+
+.rating.rating-sm > svg {
+  font-size: 12px;
+}

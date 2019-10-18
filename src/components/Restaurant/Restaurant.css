@@ -101,14 +101,6 @@
   cursor: pointer;
 }
 
-.restaurant-main-panel .food-other-details > .rating {
-  font-size: 15px;
-}
-
-.restaurant-main-panel .food-other-details > .rating > svg {
-  font-size: 15px;
-}
-
 .restaurant-main-panel .restaurants-list:not(:last-child) {
   margin-top: 20px;
   margin-bottom: 20px;
