@@ -1,3 +1,10 @@
+@charset "UTF-8";
+
+/*
+  @author Yatin Gupta
+  Rating Component Specific CSS
+*/
+
 .rating {
   color: #535665;
   height: 20px;

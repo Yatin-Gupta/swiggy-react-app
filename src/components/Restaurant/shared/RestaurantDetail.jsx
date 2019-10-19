@@ -1,9 +1,17 @@
+/**
+ * @author Yatin Gupta
+ */
 import { Card, CardContent, CardMedia } from "@material-ui/core";
 import React from "react";
 import Rating from "../../shared/Rating";
 
 import { FOOD_IMAGES } from "../RestaurantConstants";
 
+/**
+ * To render restaurant details
+ * Shared Component that can be shared between different Restaurant Components
+ * @param {Object} props
+ */
 function RestaurantDetail(props) {
   const currentImageIndex = parseInt(Math.random() * FOOD_IMAGES.length, 10);
   const { classes, restaurant } = props;

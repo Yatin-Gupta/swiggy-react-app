@@ -1,9 +1,17 @@
+/**
+ * @author Yatin Gupta
+ */
 import { Avatar } from "@material-ui/core";
 import React from "react";
 import { ICONS } from "../RestaurantConstants";
 
 import CustomHelper from "../../../lib/CustomHelper";
 
+/**
+ * To render Restaurant Category or Nav Item
+ * Shared Component that can be shared between different Restaurant Components
+ * @param {Object} props
+ */
 function RestaurantCategory(props) {
   const { category, restaurantLength, onClick } = props;
   const dashSeperatedCategory = category.replace(/\s/g, "-").toLowerCase();

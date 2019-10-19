@@ -1,3 +1,6 @@
+/**
+ * @author Yatin Gupta
+ */
 import { Avatar, Container, Grid, Card, CardContent } from "@material-ui/core";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import DragHandleIcon from "@material-ui/icons/DragHandle";
@@ -14,18 +17,27 @@ import {
   SEE_ALL_CATEGORY_NAME
 } from "./RestaurantConstants";
 
+// Restaurant grid size is made configurable
 const restaurantGridSize = parseInt(
   RESTAURANTS_PER_ROW && RESTAURANTS_PER_ROW > 0 ? 12 / RESTAURANTS_PER_ROW : 4,
   10
 );
 
+// Material UI Component specific style settings
 const useStyles = makeStyles(RestaurantStyle);
 
+/**
+ * To render Restaurants Categories(Navigation)
+ * @param {Object} restaurantsList Category wise restaurants list
+ * @param {string} selectedCategory Selected Category
+ * @param {Callback} setSelectedCategory Callback to set selected category state
+ * @param {string} idPrefix Prefix used before content ids. Default is empty string
+ * @returns JSX Expression Array
+ */
 function getRestaurantCategoriesView(
   restaurantsList,
   selectedCategory,
   setSelectedCategory,
-  toggleActionOnScroll,
   idPrefix = ""
 ) {
   const restaurantCategoryViews = [];
@@ -62,6 +74,17 @@ function getRestaurantCategoriesView(
   return restaurantCategoryViews;
 }
 
+/**
+ * To render Restaurants
+ * @param {Array} restaurants Restaurants List
+ * @param {string} category Category to which restaurants belong
+ * @param {number} limit  Maximum Limit upto which restaurants must be shown
+ * @param {Callback} setShowMoreLimit To increase category restaurants limit
+ * @param {Object} classes Object used to set Material UI classes
+ * @param {number} gridSize Grid size to render each restaurant. Default is one set from configurations
+ * @returns JSX Expression Array
+ */
+
 function getRestaurantsView(
   restaurants,
   category,
@@ -86,6 +109,7 @@ function getRestaurantsView(
       ++restaurantIndex;
     }
     if (restaurants.length > restaurantIndex) {
+      // If still there left restaurants
       restaurantViews.push(
         <Grid item lg={gridSize} key={restaurantIndex}>
           <ShowMoreCard
@@ -102,6 +126,14 @@ function getRestaurantsView(
   return restaurantViews;
 }
 
+/**
+ * To render all restaurants in a category
+ * @param {Object} restaurantsList Category wise restaurant list
+ * @param {Object} classes Object used to set Material UI classes
+ * @param {Callback} setShowMoreLimit Callback to increase category restaurants limit
+ * @param {Callback} setCategoryRef Callback to set category ref
+ * @param {string} idPrefix Prefix used before content ids. Default is empty string
+ */
 function getRestaurantsCategoryWiseView(
   restaurantsList,
   classes,
@@ -141,6 +173,11 @@ function getRestaurantsCategoryWiseView(
   return restaurantsCategoryWiseViews;
 }
 
+/**
+ * Restaurant View Component which manages only view, not business logic(like event handlers, states)
+ * @param {Object} props
+ * @returns JSX Expression
+ */
 function RestaurantView(props) {
   const classes = useStyles();
   const {
@@ -152,8 +189,7 @@ function RestaurantView(props) {
     setCategoryRef,
     setSelectedCategory,
     setShowMoreLimit,
-    setRef,
-    toggleActionOnScroll
+    setRef
   } = props;
 
   return (
@@ -167,7 +203,6 @@ function RestaurantView(props) {
                   restaurantsList,
                   selectedCategory,
                   setSelectedCategory,
-                  toggleActionOnScroll,
                   idPrefix ? idPrefix : ""
                 )}
               </CardContent>

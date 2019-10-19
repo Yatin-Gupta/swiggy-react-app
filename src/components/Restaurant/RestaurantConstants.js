@@ -1,3 +1,6 @@
+// @author Yatin Gupta
+// ICONS list fetched from swiggy site.
+// I know there are copyright issues using 3rd party images, but this I have done just for demo purpose
 export const ICONS = {
   "express-delivery": {
     dark:
@@ -38,6 +41,8 @@ export const ICONS = {
       "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_90,h_90/See_all_cj8kln"
   }
 };
+
+// Restaurant component specific constants
 
 export const FOOD_IMAGES = [
   "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=500&q=60",
