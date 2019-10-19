@@ -35,8 +35,6 @@
 
 .restaurant-categories {
   box-shadow: 0 2px 4px 0 rgba(48, 56, 97, 0.2);
-  height: 545px;
-  max-height: calc(100vh - 70px);
   overflow-y: auto;
 }
 
@@ -59,7 +57,9 @@
 
 .restaurant-side-panel {
   width: 20%;
+  height: 545px;
   position: sticky;
+  top: -1px;
 }
 
 .restaurant-main-panel {
@@ -67,19 +67,22 @@
   width: 75%;
 }
 
-.restaurant-main-panel .food-title {
+.restaurant-main-panel .food-title,
+.all-restaurants .food-title {
   font-size: 17px;
   font-weight: 500;
   word-break: break-word;
 }
 
-.restaurant-main-panel .food-type {
+.restaurant-main-panel .food-type,
+.all-restaurants .food-type {
   color: #686b78;
   font-size: 13px;
   margin-top: 4px;
 }
 
-.restaurant-main-panel .food-other-details {
+.restaurant-main-panel .food-other-details,
+.all-restaurants .food-other-details {
   display: flex;
   align-items: center;
   margin-top: 18px;
@@ -88,14 +91,16 @@
   color: #535665;
 }
 
-.restaurant-main-panel .restaurant-card {
+.restaurant-main-panel .restaurant-card,
+.all-restaurants .restaurant-card {
   padding: 20px;
   border: 1px solid #fff;
   contain: content;
   box-shadow: none;
 }
 
-.restaurant-main-panel .restaurant-card:hover {
+.restaurant-main-panel .restaurant-card:hover,
+.all-restaurants .restaurant-card:hover {
   box-shadow: 0 4px 7px 0 rgba(218, 220, 230, 0.6);
   border-color: #d3d5df;
   cursor: pointer;
@@ -128,4 +133,74 @@
 .show-more-card:hover {
   position: relative;
   box-shadow: 0 4px 14px #d4d5d9;
+}
+
+.all-restaurants {
+  background: #ec6f5b;
+  min-height: calc(100vh - 368px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.all-restaurants-heading {
+  height: 190px;
+  background: inherit;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 600;
+  margin: auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  contain: strict;
+}
+
+.all-restaurants-heading > .icon {
+  margin-right: 15px;
+}
+
+.all-restaurants-heading > .icon svg {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.all-restaurants-header {
+  height: 72px;
+  position: relative;
+  border-bottom: 1px solid #ededef;
+  margin-bottom: 30px !important;
+  display: flex;
+  align-items: flex-end;
+}
+
+.all-restaurants-header .header-title {
+  font-weight: 600;
+  font-size: 28px;
+  flex: 1;
+}
+
+.all-restaurants-header .icon {
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  margin-right: 16px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  margin-left: 2px;
+  box-shadow: 0 1px 4px 0 rgba(40, 44, 63, 0.4);
+  background-color: #fff;
+  color: #ec6f5b;
+}
+
+.all-restaurants-header .icon:hover {
+  background: #ec6f5b;
+  color: #fff;
 }

@@ -55,6 +55,10 @@ export const FOOD_IMAGES = [
 
 export const RESTAURANTS_DEFAULT_LIMIT = 5;
 
+export const SEE_ALL_CATEGORY_NAME = "SEE ALL";
+
+export const ONLY_ON_SWIGGY_CATEGORY_NAME = "only on swiggy";
+
 export const SHOW_MORE_ROWS = 2;
 
 // This number should be divisible by 12

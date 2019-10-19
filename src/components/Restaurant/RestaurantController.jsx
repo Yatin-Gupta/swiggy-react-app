@@ -5,8 +5,10 @@ import AxiosHelper from "../../lib/AxiosHelper";
 import AppConfig from "../../config/AppConfig";
 
 import {
+  ONLY_ON_SWIGGY_CATEGORY_NAME,
   RESTAURANTS_DEFAULT_LIMIT,
   RESTAURANTS_PER_ROW,
+  SEE_ALL_CATEGORY_NAME,
   SHOW_MORE_ROWS
 } from "./RestaurantConstants";
 
@@ -24,9 +26,11 @@ class RestaurantController extends React.Component {
     );
     const restaurantsList = {};
     let selectedCategory = "";
+    let categoriesScrollPosition = {};
     if (Array.isArray(response) && response.length > 0) {
       let index = 0;
       let onlyOnSwiggyRestaurants = [];
+      let allRestaurants = [];
       for (const item of response) {
         if (index === 0) {
           selectedCategory = item.category;
@@ -40,16 +44,36 @@ class RestaurantController extends React.Component {
             restaurant => restaurant.isExlusive
           )
         ];
+        allRestaurants = [
+          ...allRestaurants,
+          ...restaurantsList[item.category].restaurants
+        ];
         ++index;
       }
 
       if (onlyOnSwiggyRestaurants.length > 0) {
-        restaurantsList["only on swiggy"] = {};
-        restaurantsList["only on swiggy"].restaurants = onlyOnSwiggyRestaurants;
-        restaurantsList["only on swiggy"].limit = RESTAURANTS_DEFAULT_LIMIT;
+        restaurantsList[ONLY_ON_SWIGGY_CATEGORY_NAME] = {};
+        restaurantsList[
+          ONLY_ON_SWIGGY_CATEGORY_NAME
+        ].restaurants = onlyOnSwiggyRestaurants;
+        restaurantsList[
+          ONLY_ON_SWIGGY_CATEGORY_NAME
+        ].limit = RESTAURANTS_DEFAULT_LIMIT;
+      }
+
+      if (allRestaurants.length > 0) {
+        restaurantsList[SEE_ALL_CATEGORY_NAME] = {};
+        restaurantsList[SEE_ALL_CATEGORY_NAME].restaurants = allRestaurants;
+        restaurantsList[SEE_ALL_CATEGORY_NAME].limit = NaN;
       }
     }
-    this.setState({ restaurantsList, selectedCategory });
+    console.log("rrl");
+    console.log(restaurantsList);
+    this.setState({
+      restaurantsList,
+      selectedCategory,
+      categoriesScrollPosition
+    });
   }
 
   render() {
