@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #55443d;
+        height: 40px;
+        width: 100%;
+        z-index: 1;
+      }
+      nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: relative;
+        display: table;
+        margin: 0 auto;
+      }
+      nav ul li {
+        display: table-cell;
+      }
+      nav ul li a {
+        padding: 10px 20px;
+        display: block;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+      }
+      nav ul li a:hover {
+        color: #f38a8a;
+      }
+      nav ul .active a {
+        color: #f38a8a;
+        border-bottom: 3px solid #f38a8a;
+      }
+      section {
+        height: 100vh;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        display: block;
+        z-index: 0;
+      }
+      #home {
+        background: #a0cab5;
+        top: 40px;
+      }
+      #work {
+        background: #cde9ca;
+      }
+      #about {
+        background: #f1edd0;
+      }
+      #contact {
+        background: #f38a8a;
+      }
+      h2 {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <ul id="mainNav">
+        <li class="active"><a href="#home">Home</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <section id="home"><h2>Home</h2></section>
+    <section id="work" data-sr><h2>Work</h2></section>
+    <section id="about"><h2>About</h2></section>
+    <section id="contact"><h2>Contact</h2></section>
+    <script>
+      // Cache selectors
+      var lastId,
+        topMenu = $("#mainNav"),
+        topMenuHeight = topMenu.outerHeight() + 1,
+        // All list items
+        menuItems = topMenu.find("a"),
+        // Anchors corresponding to menu items
+        scrollItems = menuItems.map(function() {
+          var item = $($(this).attr("href"));
+          if (item.length) {
+            return item;
+          }
+        });
+
+      // Bind click handler to menu items
+      // so we can get a fancy scroll animation
+      menuItems.click(function(e) {
+        var href = $(this).attr("href"),
+          offsetTop =
+            href === "#" ? 0 : $(href).offset().top - topMenuHeight + 1;
+        $("html, body")
+          .stop()
+          .animate(
+            {
+              scrollTop: offsetTop
+            },
+            850
+          );
+        e.preventDefault();
+      });
+
+      // Bind to scroll
+      $(window).scroll(function() {
+        // Get container scroll position
+        var fromTop = $(this).scrollTop() + topMenuHeight;
+
+        // Get id of current scroll item
+        var cur = scrollItems.map(function() {
+          if ($(this).offset().top < fromTop) return this;
+        });
+        // Get the id of the current element
+        cur = cur[cur.length - 1];
+        var id = cur && cur.length ? cur[0].id : "";
+
+        if (lastId !== id) {
+          lastId = id;
+          // Set/remove active class
+          menuItems
+            .parent()
+            .removeClass("active")
+            .end()
+            .filter("[href='#" + id + "']")
+            .parent()
+            .addClass("active");
+        }
+      });
+    </script>
+  </body>
+</html>

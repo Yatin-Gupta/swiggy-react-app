@@ -63,3 +63,8 @@ export const SHOW_MORE_ROWS = 2;
 
 // This number should be divisible by 12
 export const RESTAURANTS_PER_ROW = 3;
+
+export const COLORS = {
+  white: "#fff",
+  red: "#ec6f5b"
+};

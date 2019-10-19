@@ -142,11 +142,12 @@
   overflow-y: auto;
   position: relative;
   z-index: 2;
+  transition: background-color 0.5s ease;
 }
 
 .all-restaurants-heading {
   height: 190px;
-  background: inherit;
+  background: #ec6f5b;
   color: #fff;
   font-size: 32px;
   font-weight: 600;

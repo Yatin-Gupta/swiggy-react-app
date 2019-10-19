@@ -105,6 +105,7 @@ function getRestaurantsCategoryWiseView(
   restaurantsList,
   classes,
   setShowMoreLimit,
+  setCategoryRef,
   idPrefix = ""
 ) {
   const restaurantsCategoryWiseViews = [];
@@ -112,7 +113,10 @@ function getRestaurantsCategoryWiseView(
     if (!isNaN(restaurantsList[category].limit)) {
       restaurantsCategoryWiseViews.push(
         <React.Fragment key={category}>
-          <div className="category-heading">
+          <div
+            className="category-heading"
+            ref={element => setCategoryRef(category, element)}
+          >
             {CustomHelper.formatToCapitalFirstLetterWords(category)}
           </div>
           <Grid
@@ -141,8 +145,10 @@ function RestaurantView(props) {
   const {
     restaurantsList,
     selectedCategory,
+    setCategoryRef,
     setSelectedCategory,
     setShowMoreLimit,
+    setRef,
     idPrefix
   } = props;
 
@@ -169,12 +175,16 @@ function RestaurantView(props) {
               restaurantsList,
               classes,
               setShowMoreLimit,
+              setCategoryRef,
               idPrefix ? idPrefix : ""
             )}
           </section>
         </Grid>
       </Container>
-      <div className="all-restaurants">
+      <div
+        className="all-restaurants"
+        ref={element => setRef("seeAllParentElementRef", element)}
+      >
         <div className="all-restaurants-heading">
           <span className="icon">
             <ArrowDownwardIcon />
@@ -196,10 +206,21 @@ function RestaurantView(props) {
                   <Avatar className="icon">
                     <DragHandleIcon />
                   </Avatar>
-                  <span className="header-title">94 Restaurants</span>
+                  <span className="header-title">
+                    {restaurantsList[SEE_ALL_CATEGORY_NAME]
+                      ? restaurantsList[SEE_ALL_CATEGORY_NAME].restaurants
+                          .length
+                      : 0}{" "}
+                    Restaurants
+                  </span>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} className="restaurants-list">
+              <Grid
+                container
+                spacing={2}
+                className="restaurants-list"
+                ref={element => setCategoryRef(SEE_ALL_CATEGORY_NAME, element)}
+              >
                 {restaurantsList[SEE_ALL_CATEGORY_NAME] ? (
                   getRestaurantsView(
                     restaurantsList[SEE_ALL_CATEGORY_NAME].restaurants,

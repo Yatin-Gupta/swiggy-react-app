@@ -9,7 +9,8 @@ import {
   RESTAURANTS_DEFAULT_LIMIT,
   RESTAURANTS_PER_ROW,
   SEE_ALL_CATEGORY_NAME,
-  SHOW_MORE_ROWS
+  SHOW_MORE_ROWS,
+  COLORS
 } from "./RestaurantConstants";
 
 import "./Restaurant.css";
@@ -19,6 +20,9 @@ class RestaurantController extends React.Component {
     restaurantsList: {},
     selectedCategory: ""
   };
+
+  categoryRefs = {};
+  seeAllParentElementRef = null;
 
   async componentDidMount() {
     const response = await AxiosHelper.axiosGetAction(
@@ -48,6 +52,7 @@ class RestaurantController extends React.Component {
           ...allRestaurants,
           ...restaurantsList[item.category].restaurants
         ];
+        this.categoryRefs[item.category] = null;
         ++index;
       }
 
@@ -67,8 +72,7 @@ class RestaurantController extends React.Component {
         restaurantsList[SEE_ALL_CATEGORY_NAME].limit = NaN;
       }
     }
-    console.log("rrl");
-    console.log(restaurantsList);
+    window.addEventListener("scroll", this.scrollHandler);
     this.setState({
       restaurantsList,
       selectedCategory,
@@ -85,10 +89,46 @@ class RestaurantController extends React.Component {
           selectedCategory={selectedCategory}
           setSelectedCategory={this.setSelectedCategory}
           setShowMoreLimit={this.setShowMoreLimit}
+          setCategoryRef={this.setCategoryRef}
+          setRef={this.setRef}
         />
       </React.Fragment>
     );
   }
+
+  scrollHandler = event => {
+    const { selectedCategory } = this.state;
+    let tempCategory = selectedCategory;
+    let topDistance = undefined;
+    for (const category in this.categoryRefs) {
+      if (this.categoryRefs[category]) {
+        const elementCoords = this.categoryRefs[
+          category
+        ].getBoundingClientRect();
+        if (elementCoords.top <= 0) {
+          if (topDistance === undefined || elementCoords.top > topDistance) {
+            topDistance = elementCoords.top;
+            tempCategory = category;
+          }
+        }
+      }
+    }
+    if (selectedCategory !== tempCategory) {
+      if (this.seeAllParentElementRef !== null) {
+        this.seeAllParentElementRef.style.backgroundColor =
+          tempCategory === SEE_ALL_CATEGORY_NAME ? COLORS.white : COLORS.red;
+      }
+      this.setState({ selectedCategory: tempCategory });
+    }
+  };
+
+  setCategoryRef = (category, element) => {
+    this.categoryRefs[category] = element;
+  };
+
+  setRef = (refName, element) => {
+    this[refName] = element;
+  };
 
   setSelectedCategory = category => {
     this.setState({ selectedCategory: category });
