@@ -25,6 +25,7 @@ function getRestaurantCategoriesView(
   restaurantsList,
   selectedCategory,
   setSelectedCategory,
+  toggleActionOnScroll,
   idPrefix = ""
 ) {
   const restaurantCategoryViews = [];
@@ -143,16 +144,17 @@ function getRestaurantsCategoryWiseView(
 function RestaurantView(props) {
   const classes = useStyles();
   const {
+    idPrefix,
+    moveToLastCategory,
+    lastSelectedCategory,
     restaurantsList,
     selectedCategory,
     setCategoryRef,
     setSelectedCategory,
     setShowMoreLimit,
     setRef,
-    idPrefix
+    toggleActionOnScroll
   } = props;
-
-  console.log(restaurantsList);
 
   return (
     <React.Fragment>
@@ -165,6 +167,7 @@ function RestaurantView(props) {
                   restaurantsList,
                   selectedCategory,
                   setSelectedCategory,
+                  toggleActionOnScroll,
                   idPrefix ? idPrefix : ""
                 )}
               </CardContent>
@@ -203,7 +206,25 @@ function RestaurantView(props) {
                     idPrefix ? idPrefix : ""
                   }${SEE_ALL_CATEGORY_NAME.replace(/\s/g, "-").toLowerCase()}`}
                 >
-                  <Avatar className="icon">
+                  <Avatar
+                    className="icon"
+                    onClick={event => {
+                      event.preventDefault();
+                      const lastSelectedCategoryId = lastSelectedCategory
+                        .replace(/\s/g, "-")
+                        .toLowerCase();
+                      const lastSelectedElement = document.getElementById(
+                        lastSelectedCategoryId
+                      );
+                      if (lastSelectedElement !== null) {
+                        lastSelectedElement.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start"
+                        });
+                        moveToLastCategory();
+                      }
+                    }}
+                  >
                     <DragHandleIcon />
                   </Avatar>
                   <span className="header-title">
